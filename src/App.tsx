@@ -25,7 +25,7 @@ import {
 } from 'lucide-react';
 
 // --- Types ---
-type Page = 'home' | 'about' | 'projects' | 'project-detail' | 'aigc';
+type Page = 'home' | 'about' | 'projects' | 'project-detail' | 'aigc' | 'motion';
 
 interface Project {
   id: string;
@@ -35,6 +35,17 @@ interface Project {
   image: string;
   tags: string[];
   description: string;
+}
+
+interface MotionWork {
+  id: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  category: string;
+  description: string;
+  details?: string[];
+  gallery?: string[];
 }
 
 // --- Constants ---
@@ -83,6 +94,57 @@ const PROJECTS: Project[] = [
     image: 'https://i.postimg.cc/Bbp4Nb9q/hai-wai-yun-ying-shi-jue-she-ji.png',
     tags: ['Branding', 'Operation', 'Global'],
     description: '为中国移动海外品牌 CMLink 提供全方位的视觉运营支持。通过系统化的设计语言，提升品牌在海外市场的专业度与辨识度，助力全球业务增长。'
+  },
+  {
+    id: 'bolema-materials',
+    title: '伯乐马运营物料设计',
+    subtitle: '线上线下运营物料设计',
+    category: '运营设计',
+    image: 'https://i.postimg.cc/GtvqGTjn/bo-le-ma-zhao-pin-wu-liao-she-ji1.png',
+    tags: ['Operation', 'Branding', 'Design'],
+    description: '伯乐马线上线下运营物料设计，涵盖招聘、活动、品牌推广等多维度的视觉呈现。通过系统化的设计语言，确保品牌在不同媒介上的视觉统一性与传播力。'
+  }
+];
+
+const MOTION_WORKS: MotionWork[] = [
+  {
+    id: 'fadada-motion',
+    title: '法大大动效设计',
+    subtitle: '法大大品牌动效呈现',
+    image: 'https://i.postimg.cc/3NWhNdx4/fa-da-da.gif',
+    category: 'Motion Graphics',
+    description: '法大大品牌视觉动态化呈现，通过流畅的动效传达品牌的科技感与专业度。',
+    details: ['https://i.postimg.cc/3NWhNdx4/fa-da-da.gif']
+  },
+  {
+    id: 'bolema-motion',
+    title: '',
+    subtitle: '待更新',
+    image: 'https://i.postimg.cc/G2xNRrPj/bo-le-ma-shou-ban.gif',
+    category: 'Motion Graphics',
+    description: '伯乐马手办产品的动态展示，捕捉产品的细节与动态美感。',
+    details: ['https://i.postimg.cc/G2xNRrPj/bo-le-ma-shou-ban.gif']
+  },
+  {
+    id: 'golden-bolema',
+    title: '伯乐马动效',
+    subtitle: '伯乐马系列手办动效呈现',
+    image: 'https://i.postimg.cc/gjDn3wVn/huang-jin-bo-le.gif',
+    category: 'Motion Graphics',
+    description: '伯乐系列造型的动效制作，全程依托AIGC技术与可灵工具，搭建“创意构思—动效设计—开发适配”的完整工作流。\n\n设计的旋转一周动效，核心用于交付开发实现交互功能，支持手指拖拉操作，可带动手办360°旋转，既保证了动效统一性，又大幅提升创作与开发衔接效率，实现动效设计与开发交互的高效落地。',
+    details: [
+      'https://i.postimg.cc/gjDn3wVn/huang-jin-bo-le.gif',
+      'https://i.postimg.cc/xT7cMNBn/bo-le-ma-shou-ban-dong-xiao-jiao-fu-gong-zuo-liu.png',
+      'https://i.postimg.cc/ZRQf4RBJ/bai-yin-bo-le.gif',
+      'https://i.postimg.cc/cHzD0Hgt/bo-jin-bo-le.gif'
+    ],
+    gallery: [
+      'https://i.postimg.cc/mDgtsYK5/qing-tong-bo-le.png',
+      'https://i.postimg.cc/gJ2nWV17/huang-jin-bo-le.png',
+      'https://i.postimg.cc/nV5MyQ20/bai-yin-bo-le.png',
+      'https://i.postimg.cc/c1j6p8hT/bo-jin-bo-le.png',
+      'https://i.postimg.cc/RVHq4Vps/jian-xi-bo-le.png'
+    ]
   }
 ];
 
@@ -102,6 +164,7 @@ const Navbar = ({ currentPage, setCurrentPage, clearProject }: { currentPage: Pa
     { id: 'home', label: '首页', icon: Layout },
     { id: 'about', label: '关于', icon: User },
     { id: 'projects', label: '作品', icon: Briefcase },
+    { id: 'motion', label: '动效', icon: Palette },
     { id: 'aigc', label: 'AIGC', icon: Cpu },
   ];
 
@@ -127,7 +190,7 @@ const Navbar = ({ currentPage, setCurrentPage, clearProject }: { currentPage: Pa
               key={item.id}
               onClick={() => {
                 clearProject();
-                if (['about', 'projects', 'aigc'].includes(item.id) && currentPage === 'home') {
+                if (['about', 'projects', 'aigc', 'motion'].includes(item.id) && currentPage === 'home') {
                   const element = document.getElementById(item.id);
                   if (element) {
                     element.scrollIntoView({ behavior: 'smooth' });
@@ -164,7 +227,7 @@ const Navbar = ({ currentPage, setCurrentPage, clearProject }: { currentPage: Pa
                   key={item.id}
                   onClick={() => {
                     clearProject();
-                    if (['about', 'projects', 'aigc'].includes(item.id) && currentPage === 'home') {
+                    if (['about', 'projects', 'aigc', 'motion'].includes(item.id) && currentPage === 'home') {
                       const element = document.getElementById(item.id);
                       if (element) {
                         element.scrollIntoView({ behavior: 'smooth' });
@@ -373,7 +436,7 @@ const Hero = ({ onExplore }: { onExplore: () => void }) => {
               <img 
                 src="https://i.postimg.cc/c46FHyTF/image_85.png" 
                 alt="钟晓滢" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-all duration-700"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -488,7 +551,7 @@ const Projects = ({ onSelectProject }: { onSelectProject: (id: string) => void }
               <div className="w-10 h-[1px] bg-blue-500"></div>
               <h2 className="text-[10px] tracking-[0.5em] uppercase text-blue-400 font-bold">Portfolio Selection</h2>
             </div>
-            <h3 className="text-6xl font-serif italic leading-tight">精选作品<br /><span className="text-white/20">SELECTED WORKS</span></h3>
+            <h3 className="text-6xl font-serif italic leading-tight">项目案例<br /><span className="text-white/20">SELECTED WORKS</span></h3>
           </div>
           <div className="flex flex-wrap gap-3">
             {['全部', '包装设计', '界面设计', '运营设计', 'ip设计'].map(filter => (
@@ -525,7 +588,7 @@ const Projects = ({ onSelectProject }: { onSelectProject: (id: string) => void }
                 <img 
                   src={project.image} 
                   alt={project.title} 
-                  className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 ${project.id === 'cmlink' ? 'grayscale' : 'grayscale-[0.5] group-hover:grayscale-0'}`}
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
                 
@@ -566,6 +629,49 @@ const Projects = ({ onSelectProject }: { onSelectProject: (id: string) => void }
             </motion.div>
           ))}
           </AnimatePresence>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const MotionDesignSection = ({ onSelectMotion }: { onSelectMotion: (id: string) => void }) => {
+  return (
+    <section id="motion" className="py-32 bg-[#080808]">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-20">
+          <div className="flex items-center space-x-3 mb-4">
+            <div className="w-10 h-[1px] bg-blue-500"></div>
+            <h2 className="text-[10px] tracking-[0.5em] uppercase text-blue-400 font-bold">Motion Design</h2>
+          </div>
+          <h3 className="text-6xl font-serif italic leading-tight">动效设计<br /><span className="text-white/20">MOTION GRAPHICS</span></h3>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {MOTION_WORKS.map((work, i) => (
+            <motion.div
+              key={work.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 cursor-pointer"
+              onClick={() => onSelectMotion(work.id)}
+            >
+              <img 
+                src={work.image} 
+                alt={work.title} 
+                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                <div className="text-blue-400 text-[10px] tracking-widest uppercase mb-2">{work.category}</div>
+                <h4 className="text-2xl font-bold mb-1">{work.title}</h4>
+                <p className="text-white/40 text-sm italic font-serif">{work.subtitle}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
@@ -715,7 +821,7 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
       </button>
 
       {/* Hero Section - Luxury Editorial */}
-      {projectId !== 'hangry-buddy' && projectId !== 'eco-flow' && projectId !== 'fadada' && (
+      {projectId !== 'hangry-buddy' && projectId !== 'eco-flow' && projectId !== 'fadada' && projectId !== 'bolema-materials' && (
         <div className="relative min-h-screen w-full overflow-hidden bg-[#050505] flex items-center justify-center">
           <div className={`max-w-7xl mx-auto px-6 w-full ${isTanLive ? 'flex flex-col items-center text-center' : 'grid grid-cols-1 lg:grid-cols-2 gap-24 items-center'}`}>
             {/* Left Content */}
@@ -949,7 +1055,7 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
                             <img 
                               src={state.url} 
                               alt={state.name} 
-                              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                              className="w-full h-full object-cover transition-all duration-500"
                               referrerPolicy="no-referrer"
                             />
                           </div>
@@ -1235,6 +1341,33 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
               ))}
             </div>
           </div>
+        ) : projectId === 'bolema-materials' ? (
+          <div className="bg-black pt-32 pb-24">
+            <div className="max-w-5xl mx-auto px-6 space-y-12">
+              {[
+                'https://i.postimg.cc/GtvqGTjn/bo-le-ma-zhao-pin-wu-liao-she-ji1.png',
+                'https://i.postimg.cc/fLG9cHHZ/bo-le-ma-zhao-pin-wu-liao-she-ji2.png',
+                'https://i.postimg.cc/LXYPZdVF/bo-le-ma-zhao-pin-wu-liao-she-ji3.png',
+                'https://i.postimg.cc/6qCYn4hJ/bo-le-ma-zhao-pin-wu-liao-she-ji4.png',
+                'https://i.postimg.cc/Y95W6XXp/bo-le-ma-zhao-pin-wu-liao-she-ji5.png',
+                'https://i.postimg.cc/9MR9q3B2/bo-le-ma-zhao-pin-wu-liao-she-ji6.png'
+              ].map((url, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: idx * 0.1 }}
+                >
+                  <img 
+                    src={url} 
+                    alt={`Project Detail ${idx + 1}`} 
+                    className="w-full h-auto rounded-xl shadow-2xl border border-white/5"
+                    referrerPolicy="no-referrer"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
             {/* Fallback for unknown projects */}
@@ -1273,6 +1406,105 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
   );
 };
 
+const MotionDetail = ({ motionId, onBack }: { motionId: string, onBack: () => void }) => {
+  const work = MOTION_WORKS.find(w => w.id === motionId);
+  if (!work) return null;
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[60] bg-black overflow-y-auto"
+    >
+      <button 
+        onClick={onBack}
+        className="fixed top-8 left-8 z-[70] w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-white hover:text-black transition-all"
+      >
+        <X size={24} />
+      </button>
+
+      <div className="relative min-h-screen w-full bg-[#050505] flex flex-col items-center pt-32 pb-24 px-6">
+        <div className="max-w-4xl w-full space-y-12">
+          {/* Header */}
+          <div className="space-y-6 text-center">
+            <div className="flex items-center justify-center space-x-4">
+              <span className="text-blue-500 font-mono text-[10px] tracking-[0.5em] uppercase">{work.category}</span>
+              <div className="h-[1px] w-12 bg-blue-500/30"></div>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-serif font-light leading-[1.1] tracking-tight text-white">
+              {work.title}
+            </h1>
+            <p className="text-lg text-white/40 font-light leading-relaxed italic">
+              {work.subtitle}
+            </p>
+          </div>
+
+          {/* Main Visual */}
+          <div className="aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900">
+            <img 
+              src={work.image} 
+              alt={work.title} 
+              className="w-full h-full object-contain"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          {/* Description */}
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            <p className="text-white/60 leading-relaxed text-lg whitespace-pre-line">
+              {work.description}
+            </p>
+            <div className="h-[1px] w-24 bg-white/10 mx-auto"></div>
+          </div>
+
+          {/* Additional Details if any */}
+          {work.details && work.details.length > 1 && (
+            <div className="grid grid-cols-1 gap-12">
+              {work.details.slice(1).map((url, idx) => (
+                <div key={idx} className="aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900">
+                  <img 
+                    src={url} 
+                    alt={`${work.title} Detail ${idx + 1}`} 
+                    className="w-full h-full object-contain"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Gallery in a row */}
+          {work.gallery && work.gallery.length > 0 && (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {work.gallery.map((url, idx) => (
+                <div key={idx} className="aspect-square rounded-xl overflow-hidden border border-white/10 shadow-lg bg-zinc-900">
+                  <img 
+                    src={url} 
+                    alt={`${work.title} Gallery ${idx + 1}`} 
+                    className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="bg-[#080808] py-24 border-t border-white/5 text-center">
+        <button 
+          onClick={onBack}
+          className="text-xs font-mono tracking-[0.4em] uppercase text-white/30 hover:text-blue-400 transition-colors"
+        >
+          Close Project
+        </button>
+      </div>
+    </motion.div>
+  );
+};
+
 const BackToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -1303,13 +1535,18 @@ const BackToTop = () => {
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [selectedMotionId, setSelectedMotionId] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage, selectedProjectId]);
+  }, [currentPage, selectedProjectId, selectedMotionId]);
 
   const handleSelectProject = (id: string) => {
     setSelectedProjectId(id);
+  };
+
+  const handleSelectMotion = (id: string) => {
+    setSelectedMotionId(id);
   };
 
   return (
@@ -1317,7 +1554,10 @@ export default function App() {
       <Navbar 
         currentPage={currentPage} 
         setCurrentPage={setCurrentPage} 
-        clearProject={() => setSelectedProjectId(null)} 
+        clearProject={() => {
+          setSelectedProjectId(null);
+          setSelectedMotionId(null);
+        }} 
       />
       
       <main>
@@ -1326,6 +1566,7 @@ export default function App() {
             <Hero onExplore={() => setCurrentPage('projects')} />
             <About />
             <Projects onSelectProject={handleSelectProject} />
+            <MotionDesignSection onSelectMotion={handleSelectMotion} />
             <AIGCSection />
           </>
         )}
@@ -1343,6 +1584,12 @@ export default function App() {
             <AIGCSection />
           </div>
         )}
+
+        {currentPage === 'motion' && (
+          <div className="pt-20">
+            <MotionDesignSection onSelectMotion={handleSelectMotion} />
+          </div>
+        )}
       </main>
 
       <Footer />
@@ -1354,6 +1601,15 @@ export default function App() {
             projectId={selectedProjectId} 
             onBack={() => setSelectedProjectId(null)} 
             onSelectProject={handleSelectProject}
+          />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedMotionId && (
+          <MotionDetail 
+            motionId={selectedMotionId} 
+            onBack={() => setSelectedMotionId(null)} 
           />
         )}
       </AnimatePresence>
