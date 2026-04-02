@@ -45,7 +45,7 @@ interface MotionWork {
   category: string;
   description: string;
   details?: string[];
-  gallery?: string[];
+  gallery?: { url: string; name: string }[];
 }
 
 // --- Constants ---
@@ -114,7 +114,21 @@ const MOTION_WORKS: MotionWork[] = [
     image: 'https://i.postimg.cc/3NWhNdx4/fa-da-da.gif',
     category: 'Motion Graphics',
     description: '法大大品牌视觉动态化呈现，通过流畅的动效传达品牌的科技感与专业度。',
-    details: ['https://i.postimg.cc/3NWhNdx4/fa-da-da.gif']
+    details: ['https://i.postimg.cc/3NWhNdx4/fa-da-da.gif'],
+    gallery: [
+      { url: 'https://i.postimg.cc/cCVr3TcF/duo-ren-zai-xian-qi-cao.gif', name: '多人在线起草' },
+      { url: 'https://i.postimg.cc/FRCfrhkH/shi-ming-ren-zheng.gif', name: '实名认证' },
+      { url: 'https://i.postimg.cc/QCRH7Sqm/lu-yue-ti-xing.gif', name: '履约提醒' },
+      { url: 'https://i.postimg.cc/BbdXFNCw/cha-yi-dao-chu.gif', name: '差异导出' },
+      { url: 'https://i.postimg.cc/mDpcLTzn/pi-liang-qian-shu.gif', name: '批量签署' },
+      { url: 'https://i.postimg.cc/sDhBzdVJ/zhi-cheng-duo-zhong-wen-jian-ge-shi.gif', name: '支持多种文件格式' },
+      { url: 'https://i.postimg.cc/WzQhZS7g/qian-shu-shen-pi.gif', name: '签署审批' },
+      { url: 'https://i.postimg.cc/PxVLXdpc/qian-shu-shi-jian-chuo.gif', name: '签署时间戳' },
+      { url: 'https://i.postimg.cc/x8kXqBL3/zi-dong-fen-lei.gif', name: '自动分类' },
+      { url: 'https://i.postimg.cc/pr9my3KY/zheng-ju-guan-li.gif', name: '证据管理' },
+      { url: 'https://i.postimg.cc/4yKYnjpg/fang-cuan-gai.gif', name: '防篡改' },
+      { url: 'https://i.postimg.cc/P5Gng0xQ/de-qiu-dong-xiao.gif', name: '地球动效' }
+    ]
   },
   {
     id: 'bolema-motion',
@@ -139,11 +153,11 @@ const MOTION_WORKS: MotionWork[] = [
       'https://i.postimg.cc/cHzD0Hgt/bo-jin-bo-le.gif'
     ],
     gallery: [
-      'https://i.postimg.cc/mDgtsYK5/qing-tong-bo-le.png',
-      'https://i.postimg.cc/gJ2nWV17/huang-jin-bo-le.png',
-      'https://i.postimg.cc/nV5MyQ20/bai-yin-bo-le.png',
-      'https://i.postimg.cc/c1j6p8hT/bo-jin-bo-le.png',
-      'https://i.postimg.cc/RVHq4Vps/jian-xi-bo-le.png'
+      { url: 'https://i.postimg.cc/RVHq4Vps/jian-xi-bo-le.png', name: '见习伯乐' },
+      { url: 'https://i.postimg.cc/mDgtsYK5/qing-tong-bo-le.png', name: '青铜伯乐' },
+      { url: 'https://i.postimg.cc/nV5MyQ20/bai-yin-bo-le.png', name: '白银伯乐' },
+      { url: 'https://i.postimg.cc/gJ2nWV17/huang-jin-bo-le.png', name: '黄金伯乐' },
+      { url: 'https://i.postimg.cc/c1j6p8hT/bo-jin-bo-le.png', name: '铂金伯乐' }
     ]
   }
 ];
@@ -398,7 +412,7 @@ const Hero = ({ onExplore }: { onExplore: () => void }) => {
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">PORTFOLIO</span>
           </h1>
           <p className="text-white/50 text-lg mb-10 max-w-md leading-relaxed">
-            专注视觉设计、品牌升级与IP打造。用设计重塑认知，为品牌赋能。
+            熟练掌握品牌视觉与网站设计，具备稳定的视觉体系搭建能力，擅长插画、动效及 AIGC 辅助设计，可独立完成全链路视觉项目。
           </p>
           <div className="flex flex-wrap gap-4">
             <button 
@@ -528,6 +542,71 @@ const About = () => {
                   </p>
                 </div>
               </div>
+            </div>
+
+            <div>
+              <h3 className="text-xs tracking-[0.3em] uppercase text-white/30 mb-8 flex items-center">
+                <span className="w-8 h-[1px] bg-white/20 mr-4"></span>
+                核心技能 / Core Skills
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { 
+                    title: '品牌视觉与网站设计', 
+                    desc: '具备稳定的视觉体系搭建能力，构建系统化视觉语言。',
+                    icon: Layout,
+                    color: 'bg-blue-500/10 text-blue-400'
+                  },
+                  { 
+                    title: '插画设计', 
+                    desc: '擅长商业插画与 IP 形象设计，输出风格化视觉方案。',
+                    icon: Palette,
+                    color: 'bg-purple-500/10 text-purple-400'
+                  },
+                  { 
+                    title: '动效设计', 
+                    desc: '熟练运用 AE、Spine、可灵等工具，具备完整动效落地能力。',
+                    icon: Palette,
+                    color: 'bg-blue-500/10 text-blue-400'
+                  },
+                  { 
+                    title: 'AIGC 辅助设计', 
+                    desc: '集成 Midjourney、即梦、豆包等工具，构建高效提效流。',
+                    icon: Cpu,
+                    color: 'bg-emerald-500/10 text-emerald-400'
+                  }
+                ].map((skill, i) => (
+                  <motion.div 
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    viewport={{ once: true }}
+                    className="p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-all flex items-start space-x-4"
+                  >
+                    <div className={`w-8 h-8 rounded-lg ${skill.color} flex items-center justify-center shrink-0`}>
+                      <skill.icon size={16} />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold mb-1">{skill.title}</h4>
+                      <p className="text-[11px] text-white/40 leading-relaxed">
+                        {skill.desc}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.div 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="mt-6 flex items-center space-x-2 text-[10px] tracking-[0.2em] uppercase text-white/20 font-bold"
+              >
+                <div className="w-1 h-1 rounded-full bg-blue-500/40"></div>
+                <span>可独立完成全链路视觉项目</span>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -1474,19 +1553,78 @@ const MotionDetail = ({ motionId, onBack }: { motionId: string, onBack: () => vo
             </div>
           )}
 
-          {/* Gallery in a row */}
+          {/* Gallery section */}
           {work.gallery && work.gallery.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-              {work.gallery.map((url, idx) => (
-                <div key={idx} className="aspect-square rounded-xl overflow-hidden border border-white/10 shadow-lg bg-zinc-900">
-                  <img 
-                    src={url} 
-                    alt={`${work.title} Gallery ${idx + 1}`} 
-                    className="w-full h-full object-cover"
-                    referrerPolicy="no-referrer"
-                  />
+            <div className="space-y-16">
+              {work.id === 'golden-bolema' && (
+                <div className="flex flex-col items-center space-y-4">
+                  <div className="text-blue-500 font-mono text-[10px] tracking-[0.4em] uppercase">Extended Badges</div>
+                  <h3 className="text-3xl font-serif font-light italic tracking-wide text-white/90">延展徽章</h3>
                 </div>
-              ))}
+              )}
+              
+              {work.id === 'fadada-motion' ? (
+                <div className="space-y-24">
+                  <div className="relative overflow-hidden -mx-6">
+                    <div className="flex gap-6 animate-marquee hover:[animation-play-state:paused] w-max px-6">
+                      {[...Array(3)].map((_, groupIndex) => (
+                        <div key={groupIndex} className="flex gap-6">
+                          {work.gallery?.filter(item => item.name !== '地球动效').map((item, idx) => (
+                            <div key={`${groupIndex}-${idx}`} className="w-[400px] flex flex-col items-center space-y-4 shrink-0 group">
+                              <div className="w-full rounded-xl overflow-hidden border border-white/10 shadow-lg bg-zinc-900">
+                                <img 
+                                  src={item.url} 
+                                  alt={item.name} 
+                                  className="w-full h-auto block transition-transform duration-500 group-hover:scale-110"
+                                  referrerPolicy="no-referrer"
+                                />
+                              </div>
+                              <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">{item.name}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                    {/* Gradient Overlays */}
+                    <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                    <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+                  </div>
+
+                  {/* Earth Animation in a separate row */}
+                  {work.gallery?.find(item => item.name === '地球动效') && (
+                    <div className="max-w-4xl mx-auto w-full space-y-8">
+                      <div className="flex flex-col items-center space-y-4">
+                        <div className="text-blue-500 font-mono text-[10px] tracking-[0.4em] uppercase">Brand Visual</div>
+                        <h3 className="text-3xl font-serif font-light italic tracking-wide text-white/90">地球动效</h3>
+                      </div>
+                      <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl bg-zinc-900">
+                        <img 
+                          src={work.gallery.find(item => item.name === '地球动效')?.url} 
+                          alt="地球动效" 
+                          className="w-full h-auto block"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                  {work.gallery.map((item, idx) => (
+                    <div key={idx} className="flex flex-col items-center space-y-3">
+                      <div className="aspect-square w-full rounded-xl overflow-hidden border border-white/10 shadow-lg bg-zinc-900">
+                        <img 
+                          src={item.url} 
+                          alt={item.name} 
+                          className="w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">{item.name}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
