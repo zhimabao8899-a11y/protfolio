@@ -131,15 +131,6 @@ const MOTION_WORKS: MotionWork[] = [
     ]
   },
   {
-    id: 'bolema-motion',
-    title: '',
-    subtitle: '待更新',
-    image: 'https://i.postimg.cc/G2xNRrPj/bo-le-ma-shou-ban.gif',
-    category: 'Motion Graphics',
-    description: '伯乐马手办产品的动态展示，捕捉产品的细节与动态美感。',
-    details: ['https://i.postimg.cc/G2xNRrPj/bo-le-ma-shou-ban.gif']
-  },
-  {
     id: 'golden-bolema',
     title: '伯乐马动效',
     subtitle: '伯乐马系列手办动效呈现',
