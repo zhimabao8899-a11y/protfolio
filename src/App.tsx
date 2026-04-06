@@ -51,13 +51,13 @@ interface MotionWork {
 // --- Constants ---
 const PROJECTS: Project[] = [
   {
-    id: 'hangry-buddy',
-    title: 'HANGRY BUDDY',
-    subtitle: '魔芋面系列包装设计',
-    category: '包装设计',
-    image: 'https://pic1.imgdb.cn/item/69b8b525a77f4cac5be43ccb.jpg',
-    tags: ['Packaging', 'Illustration', 'Branding'],
-    description: '针对健康速食赛道的包装困局，通过“视觉语言强化风味联想”与“低饱和度马卡龙色系”打造差异化。引入“星鼻鼹 IP”增强趣味性与品牌记忆点。'
+    id: 'fadada',
+    title: '法大大官网首页改版',
+    subtitle: '法大大官网品牌视觉升级',
+    category: '界面设计',
+    image: 'https://i.postimg.cc/zG0T9j4s/fadada-1.png',
+    tags: ['UI/UX', 'Web Design', 'Design System'],
+    description: '解决旧版信息杂乱、价值抽象的问题。通过重构首屏布局、功能可视化、服务优势模块优化，建立统一、规范、可复用的视觉体系。'
   },
   {
     id: 'tanlive',
@@ -69,13 +69,13 @@ const PROJECTS: Project[] = [
     description: '以“低碳、科技、可持续、未来感”为关键词，选取海豹为原型打造“益仔”IP形象。通过科技配件强化“数字化、智能化”属性。'
   },
   {
-    id: 'fadada',
-    title: 'FADADA 2.0',
-    subtitle: '法大大官网品牌视觉升级',
-    category: '运营设计',
-    image: 'https://i.postimg.cc/zG0T9j4s/fadada-1.png',
-    tags: ['UI/UX', 'Web Design', 'Design System'],
-    description: '解决旧版信息杂乱、价值抽象的问题。通过重构首屏布局、功能可视化、服务优势模块优化，建立统一、规范、可复用的视觉体系。'
+    id: 'hangry-buddy',
+    title: 'hangry buddy 包装设计',
+    subtitle: '魔芋面系列包装设计',
+    category: '包装设计',
+    image: 'https://pic1.imgdb.cn/item/69b8b525a77f4cac5be43ccb.jpg',
+    tags: ['Packaging', 'Illustration', 'Branding'],
+    description: '针对健康速食赛道的包装困局，通过“视觉语言强化风味联想”与“低饱和度马卡龙色系”打造差异化。引入“星鼻鼹 IP”增强趣味性与品牌记忆点。'
   },
   {
     id: 'eco-flow',
@@ -621,7 +621,7 @@ const Projects = ({ onSelectProject }: { onSelectProject: (id: string) => void }
               <div className="w-10 h-[1px] bg-blue-500"></div>
               <h2 className="text-[10px] tracking-[0.5em] uppercase text-blue-400 font-bold">Portfolio Selection</h2>
             </div>
-            <h3 className="text-6xl font-serif italic leading-tight">项目案例<br /><span className="text-white/20">SELECTED WORKS</span></h3>
+            <h3 className="text-6xl font-serif italic leading-tight">项目案例</h3>
           </div>
           <div className="flex flex-wrap gap-3">
             {['全部', '包装设计', '界面设计', '运营设计', 'ip设计'].map(filter => (
@@ -714,7 +714,7 @@ const MotionDesignSection = ({ onSelectMotion }: { onSelectMotion: (id: string) 
             <div className="w-10 h-[1px] bg-blue-500"></div>
             <h2 className="text-[10px] tracking-[0.5em] uppercase text-blue-400 font-bold">Motion Design</h2>
           </div>
-          <h3 className="text-6xl font-serif italic leading-tight">动效设计<br /><span className="text-white/20">MOTION GRAPHICS</span></h3>
+          <h3 className="text-6xl font-serif italic leading-tight">动效设计</h3>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -871,7 +871,15 @@ const STICKERS = [
 ];
 
 const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: string, onBack: () => void, onSelectProject: (id: string) => void }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const project = PROJECTS.find(p => p.id === projectId);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo(0, 0);
+    }
+  }, [projectId]);
+
   if (!project) return null;
 
   const isTanLive = projectId === 'tanlive';
@@ -882,6 +890,7 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[60] bg-black overflow-y-auto"
+      ref={containerRef}
     >
       <button 
         onClick={onBack}
@@ -1477,7 +1486,15 @@ const ProjectDetail = ({ projectId, onBack, onSelectProject }: { projectId: stri
 };
 
 const MotionDetail = ({ motionId, onBack }: { motionId: string, onBack: () => void }) => {
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const work = MOTION_WORKS.find(w => w.id === motionId);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.scrollTo(0, 0);
+    }
+  }, [motionId]);
+
   if (!work) return null;
 
   return (
@@ -1486,6 +1503,7 @@ const MotionDetail = ({ motionId, onBack }: { motionId: string, onBack: () => vo
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[60] bg-black overflow-y-auto"
+      ref={containerRef}
     >
       <button 
         onClick={onBack}
@@ -1668,7 +1686,18 @@ export default function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [currentPage, selectedProjectId, selectedMotionId]);
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (selectedProjectId || selectedMotionId) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedProjectId, selectedMotionId]);
 
   const handleSelectProject = (id: string) => {
     setSelectedProjectId(id);
